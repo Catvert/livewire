@@ -6,11 +6,12 @@ class CorruptComponentPayloadException extends \Exception
 {
     use BypassViewHandler;
 
-    public function __construct($component)
+    public function __construct($component, $memo)
     {
+        $memo = json_encode($memo);
         parent::__construct(
             "Livewire encountered corrupt data when trying to hydrate the [{$component}] component. \n".
-            "Ensure that the [name, id, data] of the Livewire component wasn't tampered with between requests."
+            "Ensure that the [name, id, data] of the Livewire component wasn't tampered with between requests. {$memo}"
         );
     }
 }
